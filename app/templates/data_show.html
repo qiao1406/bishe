@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title></title>
+    <title>智能管理系统</title>
     <!-- ================= Favicon ================== -->
     <!-- Standard -->
     <link rel="shortcut icon" href="http://placehold.it/64.png/000/fff">
@@ -28,8 +28,8 @@
     <link href="/static/assets/css/style.css" rel="stylesheet">
     <style>
         #pneumonia-map {
-            width: 500px;
-            height: 250px;
+            width: 1000px;
+            height: 500px;
         }
         .select-item {
             width: 120px;
@@ -54,29 +54,13 @@
     <div class="nano">
         <div class="nano-content">
             <ul>
+                <li class="active"><a href="/data_manage/show/"><i class="ti-layout-grid2"></i> 数据展示</a></li>
+                <li><a href="/pneumonia3/"><i class="ti-marker-alt"></i> 数据管理</a></li>
                 <li>
-                    <a href="/pneumonia1/"><i class="ti-home"></i> 时空分布图 <span
-                            class="sidebar-collapse-icon ti-angle-down"></span></a>
-                </li>
-                <li class="active"><a href="/pneumonia2/"><i class="ti-stats-up"></i> 疫情发展</a></li>
-                <li><a href="/pneumonia3/"><i class="ti-layout-grid2-alt"></i> 疫情传播途径</a></li>
-                <li>
-                    <a class="sidebar-sub-toggle">
-                    <i class="ti-control-forward"></i>
-                    病毒发病症状及进化分析
-                    <span class="sidebar-collapse-icon ti-angle-down"></span></a>
-                    <ul style="display: block;">
-                        <li><a href="/pneumonia_symptom">发病症状</a></li>
-                        <li><a href="/pneumonia_measures">进化分析</a></li>
-                    </ul>
+                    <a href="/pneumonia5/"><i class="ti-panel"></i> 模型管理 </a>
                 </li>
                 <li>
-                    <a href="/pneumonia5/"><i class="ti-panel"></i> 病毒全球传染报告 <span
-                            class="sidebar-collapse-icon ti-angle-down"></span></a>
-                </li>
-                <li>
-                    <a href="/pneumonia6/"><i class="ti-bar-chart-alt"></i> 首例输入关系 <span
-                            class="sidebar-collapse-icon ti-angle-down"></span></a>
+                    <a href="/pneumonia6/"><i class="ti-pulse"></i> 趋势预测 </a>
                 </li>
             </ul>
         </div>
@@ -86,7 +70,7 @@
 <div class="header">
     <div class="pull-left">
         <div class="logo" height="50px">
-            <font color="white" size="4px"> 新型冠状病毒实时跟踪系统</font>
+            <font color="white" size="4px"> 基础设施结构健康监测系统</font>
         </div>
         <div class="hamburger sidebar-toggle">
             <span class="ti-menu"></span>
@@ -101,70 +85,62 @@
 <div class="content-wrap">
     <div class="main">
         <div class="container-fluid">
-            <div class="row">
-                <div class="col-lg-8 p-0">
-                    <div class="page-header">
-                        <div class="page-title">
-                            <h1>疫情发展曲线图</h1>
-                        </div>
-                    </div>
-                </div>
-                <!-- /# column -->
-                <div class="col-lg-4 p-0">
-                    <div class="page-header">
-                        <div class="page-title">
-
-                        </div>
-                    </div>
-                </div>
-                <!-- /# column -->
-            </div>
-            <!-- /# row -->
             <div class="main-content">
                 <div class="row">
-                    <div class="col-lg-3" id="pneumonia-map">
-                        <div class="card alert" style="width:640px;height:540px;">
-                            <div class="card-header" >
-                                <h3>国内疫情</h3><br>
-                                <h4>项目：</h4>
-                                <select class="select-item" id="china-select">
-                                    <option>新增趋势</option>
-                                    <option>确诊、疑似、重症趋势</option>
-                                    <option>境外输入</option>
-                                    <option>累计死亡、治愈</option>
-                                    <option>累计确诊</option>
-                                    <option>累计境外输入</option>
-                                </select>
-                                <button type="button" class="btn btn-primary btn-rounded m-b-10 m-l-5" id="select-go"
-                                onclick=jump('china-select','中国')>查询</button>
-                            </div>
+                    <div class="col-lg-12">
+                        <div class="card alert">
+                            <div class="card-header"><h3>数据展示</h3></div>
+                            <br>
                             <div class="card-body">
-                                <img src="../static/assets/images/china.jpg" class="img-rounded img-responsive" alt="Cinque Terre" style="width:600px;height:370px;">
+                                选择时间段:
+                                <label for="start"></label><input type="datetime-local" id="start"> - <label for="end"></label><input type="datetime-local" id="end">
+                                <br>
+                                选择传感器:
+                                <select multiple="multiple" >
+                                    <option>FSS_S01_B1_003</option>
+                                    <option>FSS_S01_B1_004</option>
+                                    <option>FSS_S01_B2_005</option>
+                                    <option>FSS_S01_B2_006</option>
+                                    <option>FSS_S01_B3_007</option>
+                                    <option>FSS_S01_L1_002</option>
+                                    <option>FSS_S01_L2_018</option>
+                                    <option>FSS_S02_B1_003</option>
+                                    <option>FSS_S02_B1_004</option>
+                                    <option>FSS_S02_B2_005</option>
+                                    <option>FSS_S02_B2_006</option>
+                                    <option>FSS_S02_L1_001</option>
+                                    <option>FSS_S02_L1_002</option>
+                                    <option>FSS_S03_B1_003</option>
+                                    <option>FSS_S03_B6_013</option>
+                                    <option>FSS_S03_B7_015</option>
+                                    <option>FSS_S04_B6_013</option>
+                                    <option>FSS_S04_B7_015</option>
+                                    <option>FSS_S05_B1_003</option>
+                                    <option>FSS_S05_B2_005</option>
+                                    <option>FSS_S05_B4_009</option>
+                                    <option>FSS_S05_B5_011</option>
+                                    <option>FSS_S05_L2_017</option>
+                                    <option>FSS_S06_B1_003</option>
+                                    <option>FSS_S06_B2_005</option>
+                                    <option>FSS_S06_B6_013</option>
+                                    <option>FSS_S06_B7_015</option>
+                                    <option>FSS_S06_L1_001</option>
+                                    <option>FSS_S07_B1_003</option>
+                                    <option>FSS_S07_B1_004</option>
+                                    <option>FSS_S07_B2_005</option>
+                                    <option>FSS_S07_B2_006</option>
+                                    <option>FSS_S07_B3_008</option>
+                                    <option>FSS_S07_B5_011</option>
+                                    <option>FSS_S07_B5_012</option>
+                                    <option>FSS_S07_L1_001</option>
+                                </select>
+                                <br>
+                                <button>查询</button>
                             </div>
                         </div>
                     </div>
-                    <!-- /# column -->
-                    <div class="col-lg-3" id="pneumonia-map">
-                        <div class="card alert" style="width:640px;height:540px;padding-right:20px;margin-left:180px;">
-                            <div class="card-header">
-                                <h3>全球疫情</h3><br>
-                                <h4>项目：</h4>
-                                <select class="select-item" id="worldwide-select">
-                                    <option>新增趋势</option>
-                                    <option>境外输入</option>
-                                </select>
-                                <button type="button" class="btn btn-primary btn-rounded m-b-10 m-l-5" id="select-go"
-                                onclick=jump('worldwide-select','全球')>查询</button>
-                            </div>
-                            <div class="card-body">
-                                <img src="../static/assets/images/wordwide.png" class="img-rounded img-responsive"
-                                     alt="Cinque Terre" style="width:600px;height:370px;">
-                            </div>
-                        </div>
-                    </div>
-                    <!-- /# column -->
                 </div>
-                <!-- /# row -->
+
             </div>
         </div>
 
