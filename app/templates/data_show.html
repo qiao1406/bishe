@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+    <!-- ================= Favicon ================== -->
+    <!-- Standard -->
+    <link rel="shortcut icon" href="http://placehold.it/64.png/000/fff">
+    <!-- Retina iPad Touch Icon-->
+    <link rel="apple-touch-icon" sizes="144x144" href="http://placehold.it/144.png/000/fff">
+    <!-- Retina iPhone Touch Icon-->
+    <link rel="apple-touch-icon" sizes="114x114" href="http://placehold.it/114.png/000/fff">
+    <!-- Standard iPad Touch Icon-->
+    <link rel="apple-touch-icon" sizes="72x72" href="http://placehold.it/72.png/000/fff">
+    <!-- Standard iPhone Touch Icon-->
+    <link rel="apple-touch-icon" sizes="57x57" href="http://placehold.it/57.png/000/fff">
+    <!-- Styles -->
+    <link href="/static/assets/fontAwesome/css/fontawesome-all.min.css" rel="stylesheet">
+    <link href="/static/assets/css/lib/themify-icons.css" rel="stylesheet">
+    <link href="/static/assets/css/lib/mmc-chat.css" rel="stylesheet"/>
+    <link href="/static/assets/css/lib/sidebar.css" rel="stylesheet">
+    <link href="/static/assets/css/lib/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/assets/css/lib/nixon.css" rel="stylesheet">
+    <link href="/static/assets/lib/lobipanel/css/lobipanel.min.css" rel="stylesheet">
+    <link href="/static/assets/css/style.css" rel="stylesheet">
+    <style>
+        #pneumonia-map {
+            width: 500px;
+            height: 250px;
+        }
+        .select-item {
+            width: 120px;
+            height: 35px;
+        }
+        #select-go{
+            height: 35px;
+            position: relative;
+            top: 5px;
+        }
+    </style>
+    <script>
+        function jump(id, location) {
+            const v = document.getElementById(id);
+            window.location.href = location + '/' + v.value
+        }
+    </script>
+</head>
+
+<body>
+<div class="sidebar sidebar-hide-to-small sidebar-shrink sidebar-gestures">
+    <div class="nano">
+        <div class="nano-content">
+            <ul>
+                <li>
+                    <a href="/pneumonia1/"><i class="ti-home"></i> 时空分布图 <span
+                            class="sidebar-collapse-icon ti-angle-down"></span></a>
+                </li>
+                <li class="active"><a href="/pneumonia2/"><i class="ti-stats-up"></i> 疫情发展</a></li>
+                <li><a href="/pneumonia3/"><i class="ti-layout-grid2-alt"></i> 疫情传播途径</a></li>
+                <li>
+                    <a class="sidebar-sub-toggle">
+                    <i class="ti-control-forward"></i>
+                    病毒发病症状及进化分析
+                    <span class="sidebar-collapse-icon ti-angle-down"></span></a>
+                    <ul style="display: block;">
+                        <li><a href="/pneumonia_symptom">发病症状</a></li>
+                        <li><a href="/pneumonia_measures">进化分析</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="/pneumonia5/"><i class="ti-panel"></i> 病毒全球传染报告 <span
+                            class="sidebar-collapse-icon ti-angle-down"></span></a>
+                </li>
+                <li>
+                    <a href="/pneumonia6/"><i class="ti-bar-chart-alt"></i> 首例输入关系 <span
+                            class="sidebar-collapse-icon ti-angle-down"></span></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- /# sidebar -->
+<div class="header">
+    <div class="pull-left">
+        <div class="logo" height="50px">
+            <font color="white" size="4px"> 新型冠状病毒实时跟踪系统</font>
+        </div>
+        <div class="hamburger sidebar-toggle">
+            <span class="ti-menu"></span>
+        </div>
+    </div>
+    <div class="pull-right p-r-15">
+
+    </div>
+</div>
+
+<!-- 主界面 -->
+<div class="content-wrap">
+    <div class="main">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-8 p-0">
+                    <div class="page-header">
+                        <div class="page-title">
+                            <h1>疫情发展曲线图</h1>
+                        </div>
+                    </div>
+                </div>
+                <!-- /# column -->
+                <div class="col-lg-4 p-0">
+                    <div class="page-header">
+                        <div class="page-title">
+
+                        </div>
+                    </div>
+                </div>
+                <!-- /# column -->
+            </div>
+            <!-- /# row -->
+            <div class="main-content">
+                <div class="row">
+                    <div class="col-lg-3" id="pneumonia-map">
+                        <div class="card alert" style="width:640px;height:540px;">
+                            <div class="card-header" >
+                                <h3>国内疫情</h3><br>
+                                <h4>项目：</h4>
+                                <select class="select-item" id="china-select">
+                                    <option>新增趋势</option>
+                                    <option>确诊、疑似、重症趋势</option>
+                                    <option>境外输入</option>
+                                    <option>累计死亡、治愈</option>
+                                    <option>累计确诊</option>
+                                    <option>累计境外输入</option>
+                                </select>
+                                <button type="button" class="btn btn-primary btn-rounded m-b-10 m-l-5" id="select-go"
+                                onclick=jump('china-select','中国')>查询</button>
+                            </div>
+                            <div class="card-body">
+                                <img src="../static/assets/images/china.jpg" class="img-rounded img-responsive" alt="Cinque Terre" style="width:600px;height:370px;">
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /# column -->
+                    <div class="col-lg-3" id="pneumonia-map">
+                        <div class="card alert" style="width:640px;height:540px;padding-right:20px;margin-left:180px;">
+                            <div class="card-header">
+                                <h3>全球疫情</h3><br>
+                                <h4>项目：</h4>
+                                <select class="select-item" id="worldwide-select">
+                                    <option>新增趋势</option>
+                                    <option>境外输入</option>
+                                </select>
+                                <button type="button" class="btn btn-primary btn-rounded m-b-10 m-l-5" id="select-go"
+                                onclick=jump('worldwide-select','全球')>查询</button>
+                            </div>
+                            <div class="card-body">
+                                <img src="../static/assets/images/wordwide.png" class="img-rounded img-responsive"
+                                     alt="Cinque Terre" style="width:600px;height:370px;">
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /# column -->
+                </div>
+                <!-- /# row -->
+            </div>
+        </div>
+
+
+        <!-- /# container-fluid -->
+    </div>
+
+    <!-- /# main -->
+</div>
+<!-- /# content wrap -->
+<script src="/static/assets/js/lib/jquery.min.js"></script>
+<!-- jquery vendor -->
+<script src="/static/assets/js/lib/jquery.nanoscroller.min.js"></script>
+<!-- nano scroller -->
+<script src="/static/assets/js/lib/sidebar.js"></script>
+<!-- sidebar -->
+<script src="/static/assets/js/lib/bootstrap.min.js"></script>
+<!-- bootstrap -->
+<script src="/static/assets/js/lib/mmc-common.js"></script>
+<script src="/static/assets/js/lib/mmc-chat.js"></script>
+<!--  Chart js -->
+<script src="/static/assets/js/lib/chart-js/Chart.bundle.js"></script>
+<script src="/static/assets/js/lib/chart-js/chartjs-init.js"></script>
+<!-- // Chart js -->
+<!--  Datamap -->
+<script src="/static/assets/js/lib/datamap/d3.min.js"></script>
+<script src="/static/assets/js/lib/datamap/topojson.js"></script>
+<script src="/static/assets/js/lib/datamap/datamaps.world.min.js"></script>
+<script src="/static/assets/js/lib/datamap/datamap-init.js"></script>
+<script src="/static/assets/lib/lobipanel/js/lobipanel.js"></script>
+<!-- // Datamap -->
+<script src="/static/assets/js/scripts.js"></script>
+<!-- scripit init-->
+<script>
+    $(document).ready(function () {
+        $('#lobipanel-custom-control').lobiPanel({
+            reload: false,
+            close: false,
+            editTitle: false
+        });
+    });
+</script>
+</body>
+
+</html>
