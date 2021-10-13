@@ -1,6 +1,6 @@
 import datetime
 from django.shortcuts import render
-from django.http import HttpResponse, JsonResponse
+from django.http import JsonResponse
 
 from .series_query import query
 

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>智能管理系统</title>
+    <!-- ================= Favicon ================== -->
+    <!-- Standard -->
+    <link rel="shortcut icon" href="/static/assets/images/favicon.ico">
+    <!-- Styles -->
+    <link href="/static/assets/fontAwesome/css/fontawesome-all.min.css" rel="stylesheet">
+    <link href="/static/assets/css/lib/themify-icons.css" rel="stylesheet">
+    <link href="/static/assets/css/lib/mmc-chat.css" rel="stylesheet"/>
+    <link href="/static/assets/css/lib/sidebar.css" rel="stylesheet">
+    <link href="/static/assets/css/lib/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/assets/css/lib/nixon.css" rel="stylesheet">
+    <link href="/static/assets/lib/lobipanel/css/lobipanel.min.css" rel="stylesheet">
+    <link href="/static/assets/css/style.css" rel="stylesheet">
+    <style>
+        #pneumonia-map {
+            width: 1000px;
+            height: 500px;
+        }
+
+        .select-item {
+            width: 120px;
+            height: 35px;
+        }
+
+        #select-go {
+            height: 35px;
+            position: relative;
+            top: 5px;
+        }
+    </style>
+    <script>
+        fetch('get_model_detail').then(function (response) {
+            response.json().then(function (json) {
+                const lines = json['data'];
+                var all_tab_str = '';
+                for (let i = 0; i < lines.length; i++) {
+                    let tab_str = `<tr><th scope="row">${i + 1}</th>`;
+                    const cols = ['model_name', 'observe_window', 'predict_gap',
+                        'predict_len', 'para_d', 'para_r', 'file_path'];
+                    for (col of cols) {
+                        tab_str += `<td>${lines[i][col]}</td>`;
+                    }
+                    tab_str += '</tr>';
+                    all_tab_str += tab_str;
+                }
+                const t = document.getElementById('detail-table');
+                t.insertAdjacentHTML('afterbegin', all_tab_str);
+            })
+        });
+    </script>
+</head>
+
+<body>
+<div class="sidebar sidebar-hide-to-small sidebar-shrink sidebar-gestures">
+    <div class="nano">
+        <div class="nano-content">
+            <ul>
+                <li><a href="/data_manage/show/"><i class="ti-layout-grid2"></i> 数据展示</a></li>
+                <li><a href="/pneumonia3/"><i class="ti-marker-alt"></i> 数据管理</a></li>
+                <li class="active">
+                    <a href="/model_manage/show"><i class="ti-panel"></i> 模型管理 </a>
+                </li>
+                <li>
+                    <a href="/pneumonia6/"><i class="ti-pulse"></i> 趋势预测 </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- /# sidebar -->
+<div class="header">
+    <div class="pull-left">
+        <div class="logo" height="50px">
+            <font color="white" size="4px"> 基础设施结构健康监测系统</font>
+        </div>
+        <div class="hamburger sidebar-toggle">
+            <span class="ti-menu"></span>
+        </div>
+    </div>
+    <div class="pull-right p-r-15">
+
+    </div>
+</div>
+
+<!-- 主界面 -->
+<div class="content-wrap">
+    <div class="main">
+        <div class="container-fluid">
+            <div class="main-content">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card alert">
+                            <div class="card-header"><h3>模型展示</h3></div>
+                            <br>
+                            <div class="card-body">
+                                <table class="table table-responsive table-bordered">
+                                    <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Model name</th>
+                                        <th>Observe window</th>
+                                        <th>Predict gap</th>
+                                        <th>Predict Length</th>
+                                        <th>Parameter d</th>
+                                        <th>Parameter r</th>
+                                        <th>File Path</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody id="detail-table">
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+        <!-- /# container-fluid -->
+    </div>
+
+    <!-- /# main -->
+</div>
+<!-- /# content wrap -->
+<script src="/static/assets/js/lib/jquery.min.js"></script>
+<!-- jquery vendor -->
+<script src="/static/assets/js/lib/jquery.nanoscroller.min.js"></script>
+<!-- nano scroller -->
+<script src="/static/assets/js/lib/sidebar.js"></script>
+<!-- sidebar -->
+<script src="/static/assets/js/lib/bootstrap.min.js"></script>
+<!-- bootstrap -->
+<script src="/static/assets/js/lib/mmc-common.js"></script>
+<script src="/static/assets/js/lib/mmc-chat.js"></script>
+<!--  Chart js -->
+<script src="/static/assets/js/lib/chart-js/Chart.bundle.js"></script>
+<script src="/static/assets/js/lib/chart-js/chartjs-init.js"></script>
+<!-- // Chart js -->
+<!--  Datamap -->
+<script src="/static/assets/js/lib/datamap/d3.min.js"></script>
+<script src="/static/assets/js/lib/datamap/topojson.js"></script>
+<script src="/static/assets/js/lib/datamap/datamaps.world.min.js"></script>
+<script src="/static/assets/js/lib/datamap/datamap-init.js"></script>
+<script src="/static/assets/lib/lobipanel/js/lobipanel.js"></script>
+<!-- // Datamap -->
+<script src="/static/assets/js/scripts.js"></script>
+<!-- scripit init-->
+<script>
+    $(document).ready(function () {
+        $('#lobipanel-custom-control').lobiPanel({
+            reload: false,
+            close: false,
+            editTitle: false
+        });
+    });
+</script>
+</body>
+
+</html>

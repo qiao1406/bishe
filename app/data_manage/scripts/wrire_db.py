@@ -2,7 +2,7 @@ import pymysql
 import pandas as pd
 
 
-csv_file = '../data/bohaiwan2020_data2.csv'
+csv_file = '../../../data/bohaiwan2020_data2.csv'
 df = pd.read_csv(csv_file, index_col='time')
 
 
