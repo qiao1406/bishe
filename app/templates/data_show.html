@@ -8,15 +8,7 @@
     <title>智能管理系统</title>
     <!-- ================= Favicon ================== -->
     <!-- Standard -->
-    <link rel="shortcut icon" href="http://placehold.it/64.png/000/fff">
-    <!-- Retina iPad Touch Icon-->
-    <link rel="apple-touch-icon" sizes="144x144" href="http://placehold.it/144.png/000/fff">
-    <!-- Retina iPhone Touch Icon-->
-    <link rel="apple-touch-icon" sizes="114x114" href="http://placehold.it/114.png/000/fff">
-    <!-- Standard iPad Touch Icon-->
-    <link rel="apple-touch-icon" sizes="72x72" href="http://placehold.it/72.png/000/fff">
-    <!-- Standard iPhone Touch Icon-->
-    <link rel="apple-touch-icon" sizes="57x57" href="http://placehold.it/57.png/000/fff">
+    <link rel="shortcut icon" href="/static/assets/images/favicon.ico">
     <!-- Styles -->
     <link href="/static/assets/fontAwesome/css/fontawesome-all.min.css" rel="stylesheet">
     <link href="/static/assets/css/lib/themify-icons.css" rel="stylesheet">
@@ -42,9 +34,77 @@
         }
     </style>
     <script>
-        function jump(id, location) {
-            const v = document.getElementById(id);
-            window.location.href = location + '/' + v.value
+        function jump() {
+            // 获取元素
+            const start_date = document.getElementById('start_date').value;
+            const end_date = document.getElementById('end_date').value;
+            const sensors = $("#selected-sensors").val();
+
+            // 构造新的 url
+            var url = window.location.href;
+            url = url.substr(0, url.length - 1);
+            var i = url.length - 1;
+            for (; i > 0; i--) {
+                if (url[i] === '/') {
+                    break;
+                }
+            }
+            url = url.substr(0, i + 1) + 'show_trend/';
+            const req = `start_date=${start_date}&end_date=${end_date}&selected_sensors=${sensors.join()}`;
+
+            // 请求 URL
+            fetch(url + '?' + req).then(function (response) {
+                response.json().then(function (json) {
+                    draw(json);
+                });
+            });
+        }
+    </script>
+    <script src="http://echarts.baidu.com/build/dist/echarts.js"></script>
+    <script type="text/javascript">
+        function draw(trend_data) {
+
+            // 路径配置
+            require.config({
+                paths: {
+                    echarts: 'http://echarts.baidu.com/build/dist'
+                }
+            });
+            // 使用
+            require(
+                [
+                    'echarts',
+                    'echarts/chart/line' // 使用柱状图就加载bar模块，按需加载
+                ],
+                function (ec) {
+                    // 基于准备好的dom，初始化echarts图表
+                    const myChart = ec.init(document.getElementById('plot-main'));
+
+                    const option = {
+                        tooltip: {
+                            show: true
+                        },
+                        legend: {
+                            data: trend_data['legend']
+                        },
+                        xAxis: [
+                            {
+                                type: 'category',
+                                data: trend_data['xAxis']
+                            }
+                        ],
+                        yAxis: [
+                            {
+                                type: 'value'
+                            }
+                        ],
+                        series: trend_data['series']
+                    };
+
+                    // 为echarts对象加载数据
+                    myChart.setOption(option);
+                }
+            );
         }
     </script>
 </head>
@@ -93,10 +153,11 @@
                             <br>
                             <div class="card-body">
                                 选择时间段:
-                                <label for="start"></label><input type="datetime-local" id="start"> - <label for="end"></label><input type="datetime-local" id="end">
+                                <label for="start_date"></label><input type="datetime-local" id="start_date" value="2020-01-01T00:00"> -
+                                <label for="end_date"></label><input type="datetime-local" id="end_date" value="2020-03-01T00:00">
                                 <br>
                                 选择传感器:
-                                <select multiple="multiple" >
+                                <select multiple="multiple" id="selected-sensors">
                                     <option>FSS_S01_B1_003</option>
                                     <option>FSS_S01_B1_004</option>
                                     <option>FSS_S01_B2_005</option>
@@ -135,7 +196,8 @@
                                     <option>FSS_S07_L1_001</option>
                                 </select>
                                 <br>
-                                <button>查询</button>
+                                <button onclick="jump()">查询</button>
+                                <div id="plot-main" style="height: 600px"></div>
                             </div>
                         </div>
                     </div>
