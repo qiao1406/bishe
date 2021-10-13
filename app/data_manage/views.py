@@ -5,10 +5,6 @@ from django.http import HttpResponse, JsonResponse
 from .series_query import query
 
 
-def index(request):
-    return HttpResponse("Data Manage")
-
-
 def show(request):
     return render(request, 'data_show.html')
 
