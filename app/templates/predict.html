@@ -114,12 +114,12 @@
     <div class="nano">
         <div class="nano-content">
             <ul>
-                <li class="active"><a href="/data_manage/show/"><i class="ti-layout-grid2"></i> 数据展示</a></li>
+                <li><a href="/data_manage/show/"><i class="ti-layout-grid2"></i> 数据展示</a></li>
                 <li><a href="/pneumonia3/"><i class="ti-marker-alt"></i> 数据管理</a></li>
                 <li>
                     <a href="/model_manage/show"><i class="ti-panel"></i> 模型管理 </a>
                 </li>
-                <li>
+                <li class="active">
                     <a href="/predict/"><i class="ti-pulse"></i> 趋势预测 </a>
                 </li>
             </ul>
@@ -149,12 +149,17 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="card alert">
-                            <div class="card-header"><h3>数据展示</h3></div>
+                            <div class="card-header"><h3>演化趋势预测</h3></div>
                             <br>
                             <div class="card-body">
-                                选择时间段:
-                                <label for="start_date"></label><input type="datetime-local" id="start_date" value="2020-01-01T00:00"> -
-                                <label for="end_date"></label><input type="datetime-local" id="end_date" value="2020-03-01T00:00">
+                                模型配置
+                                <br>
+                                模型名称: <label for="model-name"></label><input id="model-name" value="WATTNet" size="6">
+                                观测长度: <label for="observe-window"></label><input id="observe-window" size="6">
+                                预测间隔: <label for="predict-gap"></label><input id="predict-gap" size="6">
+                                预测长度: <label for="predict-length"></label><input id="predict-length" size="6">
+                                d= <label for="para-d"></label><input id="para-d" value="2" size="6">
+                                r= <label for="para-r"></label><input id="para-r" value="1" size="6">
                                 <br>
                                 选择传感器:
                                 <select multiple="multiple" id="selected-sensors">
@@ -196,7 +201,7 @@
                                     <option>FSS_S07_L1_001</option>
                                 </select>
                                 <br>
-                                <button onclick="jump()">查询</button>
+                                <button onclick="jump()">预测</button>
                                 <div id="plot-main" style="height: 600px"></div>
                             </div>
                         </div>

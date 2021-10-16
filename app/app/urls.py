@@ -19,5 +19,6 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('data_manage/', include('data_manage.urls')),
-    path('model_manage/', include('model_manage.urls'))
+    path('model_manage/', include('model_manage.urls')),
+    path('predict/', include('predict.urls'))
 ]
