@@ -23,34 +23,26 @@
             width: 1000px;
             height: 500px;
         }
+
         .select-item {
             width: 120px;
             height: 35px;
         }
-        #select-go{
+
+        #select-go {
             height: 35px;
             position: relative;
             top: 5px;
         }
     </style>
     <script>
-        function jump() {
+        function load_series() {
             // 获取元素
-            const start_date = document.getElementById('start_date').value;
-            const end_date = document.getElementById('end_date').value;
             const sensors = $("#selected-sensors").val();
 
             // 构造新的 url
-            var url = window.location.href;
-            url = url.substr(0, url.length - 1);
-            var i = url.length - 1;
-            for (; i > 0; i--) {
-                if (url[i] === '/') {
-                    break;
-                }
-            }
-            url = url.substr(0, i + 1) + 'show_trend/';
-            const req = `start_date=${start_date}&end_date=${end_date}&selected_sensors=${sensors.join()}`;
+            let url = 'load_last50/';
+            const req = `selected_sensors=${sensors.join()}`;
 
             // 请求 URL
             fetch(url + '?' + req).then(function (response) {
@@ -155,51 +147,51 @@
                                 模型配置
                                 <br>
                                 模型名称: <label for="model-name"></label><input id="model-name" value="WATTNet" size="6">
-                                观测长度: <label for="observe-window"></label><input id="observe-window" size="6">
-                                预测间隔: <label for="predict-gap"></label><input id="predict-gap" size="6">
-                                预测长度: <label for="predict-length"></label><input id="predict-length" size="6">
+                                观测长度: <label for="observe-window"></label><input id="observe-window" value="14" size="6">
+                                预测间隔: <label for="predict-gap"></label><input id="predict-gap" value="10" size="6">
+                                预测长度: <label for="predict-length"></label><input id="predict-length" value="6" size="6">
                                 d= <label for="para-d"></label><input id="para-d" value="2" size="6">
                                 r= <label for="para-r"></label><input id="para-r" value="1" size="6">
                                 <br>
                                 选择传感器:
-                                <select multiple="multiple" id="selected-sensors">
-                                    <option>FSS_S01_B1_003</option>
-                                    <option>FSS_S01_B1_004</option>
-                                    <option>FSS_S01_B2_005</option>
-                                    <option>FSS_S01_B2_006</option>
-                                    <option>FSS_S01_B3_007</option>
-                                    <option>FSS_S01_L1_002</option>
-                                    <option>FSS_S01_L2_018</option>
-                                    <option>FSS_S02_B1_003</option>
-                                    <option>FSS_S02_B1_004</option>
-                                    <option>FSS_S02_B2_005</option>
-                                    <option>FSS_S02_B2_006</option>
-                                    <option>FSS_S02_L1_001</option>
-                                    <option>FSS_S02_L1_002</option>
-                                    <option>FSS_S03_B1_003</option>
-                                    <option>FSS_S03_B6_013</option>
-                                    <option>FSS_S03_B7_015</option>
-                                    <option>FSS_S04_B6_013</option>
-                                    <option>FSS_S04_B7_015</option>
-                                    <option>FSS_S05_B1_003</option>
-                                    <option>FSS_S05_B2_005</option>
-                                    <option>FSS_S05_B4_009</option>
-                                    <option>FSS_S05_B5_011</option>
-                                    <option>FSS_S05_L2_017</option>
-                                    <option>FSS_S06_B1_003</option>
-                                    <option>FSS_S06_B2_005</option>
-                                    <option>FSS_S06_B6_013</option>
-                                    <option>FSS_S06_B7_015</option>
-                                    <option>FSS_S06_L1_001</option>
-                                    <option>FSS_S07_B1_003</option>
-                                    <option>FSS_S07_B1_004</option>
-                                    <option>FSS_S07_B2_005</option>
-                                    <option>FSS_S07_B2_006</option>
-                                    <option>FSS_S07_B3_008</option>
-                                    <option>FSS_S07_B5_011</option>
-                                    <option>FSS_S07_B5_012</option>
-                                    <option>FSS_S07_L1_001</option>
-                                </select>
+                                <label for="selected-sensors"></label><select multiple="multiple" id="selected-sensors" onchange="load_series()">
+                                <option>FSS_S01_B1_003</option>
+                                <option>FSS_S01_B1_004</option>
+                                <option>FSS_S01_B2_005</option>
+                                <option>FSS_S01_B2_006</option>
+                                <option>FSS_S01_B3_007</option>
+                                <option>FSS_S01_L1_002</option>
+                                <option>FSS_S01_L2_018</option>
+                                <option>FSS_S02_B1_003</option>
+                                <option>FSS_S02_B1_004</option>
+                                <option>FSS_S02_B2_005</option>
+                                <option>FSS_S02_B2_006</option>
+                                <option>FSS_S02_L1_001</option>
+                                <option>FSS_S02_L1_002</option>
+                                <option>FSS_S03_B1_003</option>
+                                <option>FSS_S03_B6_013</option>
+                                <option>FSS_S03_B7_015</option>
+                                <option>FSS_S04_B6_013</option>
+                                <option>FSS_S04_B7_015</option>
+                                <option>FSS_S05_B1_003</option>
+                                <option>FSS_S05_B2_005</option>
+                                <option>FSS_S05_B4_009</option>
+                                <option>FSS_S05_B5_011</option>
+                                <option>FSS_S05_L2_017</option>
+                                <option>FSS_S06_B1_003</option>
+                                <option>FSS_S06_B2_005</option>
+                                <option>FSS_S06_B6_013</option>
+                                <option>FSS_S06_B7_015</option>
+                                <option>FSS_S06_L1_001</option>
+                                <option>FSS_S07_B1_003</option>
+                                <option>FSS_S07_B1_004</option>
+                                <option>FSS_S07_B2_005</option>
+                                <option>FSS_S07_B2_006</option>
+                                <option>FSS_S07_B3_008</option>
+                                <option>FSS_S07_B5_011</option>
+                                <option>FSS_S07_B5_012</option>
+                                <option>FSS_S07_L1_001</option>
+                            </select>
                                 <br>
                                 <button onclick="jump()">预测</button>
                                 <div id="plot-main" style="height: 600px"></div>
