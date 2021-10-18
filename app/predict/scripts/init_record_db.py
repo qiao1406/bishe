@@ -26,7 +26,7 @@ def write_db(time):
 
     with conn:
         with conn.cursor() as cursor:
-            sql = f'INSERT INTO `data_manage_record` (`time`, `sensor`, `val`) VALUES {gen_sql_tuples(time)}'
+            sql = f'INSERT INTO `predict_record` (`time`, `sensor`, `val`) VALUES {gen_sql_tuples(time)}'
             cursor.execute(sql)
 
         conn.commit()

@@ -32,8 +32,6 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'data_manage.apps.DataManageConfig',
-    'model_manage.apps.ModelManageConfig',
     'predict.apps.PredictConfig',
     'django.contrib.admin',
     'django.contrib.auth',

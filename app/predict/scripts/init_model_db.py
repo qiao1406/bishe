@@ -2,8 +2,9 @@ import os
 import re
 from ..models import ModelRecord
 
-# dir_path = 'C:\\WorkSpace\\bishe\\model\\model_paras'
-dir_path = '../../../model/models/'
+dir_path = 'C:\\WorkSpace\\bishe\\model\\model_paras'
+# dir_path = '../../../model/models/'
+
 
 def init():
     for file in os.listdir(dir_path):
